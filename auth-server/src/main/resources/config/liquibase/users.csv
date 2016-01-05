@@ -1,0 +1,4 @@
+id;login;PASSWORD;first_name;last_name;email;activated;lang_key;created_by
+1;auth;$2a$10$VuHllsDAArxm4j.exIBb8e1C0Y.wNpvxaHABk6Cm.AxWel2ThJaWC;Auth;Administrator;auth@ssc.com;true;en;system
+2;admin;$2a$10$1hbhpOFXv2XFrFI7eYogR.oSqeQDDC64ex4wztgO5uqxWNBPQ8o5K;Cargo;Administrator;cargoadmin@ssc.com;true;en;system
+3;user;$2a$10$mQPWEIa1NgvJ0FqxgmldKOzUsk3FdgQv6HwxajCTIbniZWcnYqzru;User;User;user@ssc.com;true;en;system

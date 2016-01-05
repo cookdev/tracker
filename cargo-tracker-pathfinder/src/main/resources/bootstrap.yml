@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Pathfinder
+  cloud:
+    config:
+      uri: http://70.50.109.200:8889
+  boot:
+    admin:
+      url: http://localhost:58001
+  profiles:
+    active: development

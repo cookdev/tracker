@@ -1,0 +1,96 @@
+databaseChangeLog:      
+  - changeSet:
+      id: 1
+      author: anyframe
+      changes:
+        - createTable:
+            tableName: registered_user
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: login_name
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: email_address
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: first_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: last_name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: mobile_phone_no
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_by
+                  type: varchar(255)
+  - changeSet:
+      id: 2
+      author: anyframe
+      changes:
+        - insert:
+            tableName: registered_user
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: login_name
+                  value: admin
+              - column:
+                  name: email_address
+                  value: admin@ssc.com
+              - column:
+                  name: first_name
+                  value: admin
+              - column:
+                  name: last_name
+                  value: ssc
+              - column:
+                  name: mobile_phone_no
+                  value: 010-1234-5678
+              - column:
+                  name: created_by
+                  value: anyframe
+        - insert:
+            tableName: registered_user
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: login_name
+                  value: user
+              - column:
+                  name: email_address
+                  value: user@ssc.com
+              - column:
+                  name: first_name
+                  value: user
+              - column:
+                  name: last_name
+                  value: ssc
+              - column:
+                  name: mobile_phone_no
+                  value: 010-8765-4321
+              - column:
+                  name: created_by
+                  value: anyframe

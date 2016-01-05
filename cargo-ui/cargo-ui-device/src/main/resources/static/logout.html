@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Incident Logger</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="../webjars/foundation/5.5.2/css/foundation.css"  rel="stylesheet"/>
+<link href="../css/cargotracker.css"  rel="stylesheet"/>
+<link href="../css/cargo-custom.css"  rel="stylesheet"/>
+</head>
+<body>
+	<!-- Cargo Tracker Navigation Menu -->
+		<div class="off-canvas-wrap" data-offcanvas>
+			<div class="inner-wrap">
+				<!-- Navigation -->
+				<nav class="tab-bar">
+					<section class="left tab-bar-section">
+						<h1><a href="/">
+							<span class="title">Cargo Tracker 
+								<label class="show-for-medium-up"> - Powered by Java EE 7</label>
+							</span>
+						</a></h1>
+					</section>
+					
+					<section class="right-small">
+						<a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+					</section>
+				</nav>
+	
+				<aside class="right-off-canvas-menu">
+					<ul class="off-canvas-list">
+						<li><label>Menu</label></li>
+						<li><a href="/">Log</a></li>
+						<li><a href="/logout.html">Logout</a></li>
+					</ul>
+				</aside>
+	
+				<section class="main-section">
+					<!-- Body Content -->
+<div class="row">
+	<div class="large-12 columns">
+		<div id="container" class="panel">
+		    <h3>Bye</h3>
+		    <h5 class="subheader">
+		        Please visit again
+		    </h5>
+		</div>
+		<div id="btnLogOut" role="button" class="button expand" tabindex="0">Log out</div>
+	</div>
+</div>
+					</div>
+				</section>
+				<a class="exit-off-canvas"></a>
+			</div>
+		</div>
+	<!-- End of Cargo Tracker Navigation Menu -->
+    
+	
+    <!-- Always have Foundation load JQuery and not Zepto -->
+	<script type="text/javascript" src="../webjars/jquery/2.1.4/jquery.js"></script>
+	<script type="text/javascript" src="../webjars/foundation/5.5.2/js/foundation.min.js"></script>
+	<!-- Common -->
+	<script src="js/base64.js"></script>
+	<script src="js/common.js"></script>
+	<script src="js/authentication.js"></script>
+	<script src="js/localStorage.js"></script>
+	<script src="js/network.js"></script>
+	<script src="js/sha256.js"></script>
+	
+	<script type="text/javascript" src="js/logout.js"></script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: anyframe
+      changes:
+        - createTable:
+            tableName: voyage
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: voyage_number
+                  type: varchar(255)
+        - createTable:
+            tableName: handling_event
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: completion_time
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: registration
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cargo_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: voyage_id
+                  type: bigint
+        - createTable:
+            tableName: location
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: unlocode
+                  type: varchar(255)
+        - createTable:
+            tableName: cargo
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: calculated_at
+                  type: datetime
+              - column:
+                  name: eta
+                  type: date
+              - column:
+                  name: unloaded_at_dest
+                  type: boolean
+              - column:
+                  name: misdirected
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: next_expected_handling_event_type
+                  type: varchar(255)
+              - column:
+                  name: routing_status
+                  type: varchar(255)
+              - column:
+                  name: transport_status
+                  type: varchar(255)
+              - column:
+                  name: spec_arrival_deadline
+                  type: date
+              - column:
+                  name: tracking_id
+                  type: varchar(255)
+              - column:
+                  name: current_voyage_id
+                  type: bigint
+              - column:
+                  name: last_event_id
+                  type: bigint
+              - column:
+                  name: last_known_location_id
+                  type: bigint
+              - column:
+                  name: next_expected_location_id
+                  type: bigint
+              - column:
+                  name: next_expected_voyage_id
+                  type: bigint
+              - column:
+                  name: origin_id
+                  type: bigint
+              - column:
+                  name: spec_destination_id
+                  type: bigint
+              - column:
+                  name: spec_origin_id
+                  type: bigint
+        - createTable:
+            tableName: leg
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: load_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: unload_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: load_location_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: unload_location_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: voyage_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: cargo_id
+                  type: bigint
+        - createTable:
+            tableName: carrier_movement
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: arrival_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: departure_time
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: arrival_location_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: departure_location_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: voyage_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - createSequence:
+            incrementBy: 1
+            schemaName: public
+            sequenceName: hibernate_sequence
+            startValue: 8
+
+#       Load CSV
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/location.csv
+            schemaName: public
+            separator: ;
+            tableName: location
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/voyage.csv
+            schemaName: public
+            separator: ;
+            tableName: voyage
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/carrier_movement.csv
+            schemaName: public
+            separator: ;
+            tableName: carrier_movement
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/cargo.csv
+            schemaName: public
+            separator: ;
+            tableName: cargo
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/handling_event.csv
+            schemaName: public
+            separator: ;
+            tableName: handling_event
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/leg.csv
+            schemaName: public
+            separator: ;
+            tableName: leg
+
+#       HANDLING_EVENT FK
+        - addForeignKeyConstraint:
+            baseColumnNames: cargo_id
+            baseTableName: handling_event
+            constraintName: handling_event_cargo_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: cargo
+        - addForeignKeyConstraint:
+            baseColumnNames: voyage_id
+            baseTableName: handling_event
+            constraintName: handling_event_voyage_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: voyage
+        - addForeignKeyConstraint:
+            baseColumnNames: location_id
+            baseTableName: handling_event
+            constraintName: handling_event_location_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+
+#       CARGO FK
+        - addForeignKeyConstraint:
+            baseColumnNames: next_expected_voyage_id
+            baseTableName: cargo
+            constraintName: cargo_next_expected_voyage_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: voyage
+        - addForeignKeyConstraint:
+            baseColumnNames: spec_destination_id
+            baseTableName: cargo
+            constraintName: cargo_spec_destination_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+        - addForeignKeyConstraint:
+            baseColumnNames: current_voyage_id
+            baseTableName: cargo
+            constraintName: cargo_current_voyage_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: voyage
+        - addForeignKeyConstraint:
+            baseColumnNames: last_event_id
+            baseTableName: cargo
+            constraintName: cargo_last_event_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: handling_event
+        - addForeignKeyConstraint:
+            baseColumnNames: last_known_location_id
+            baseTableName: cargo
+            constraintName: cargo_last_known_location_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+        - addForeignKeyConstraint:
+            baseColumnNames: origin_id
+            baseTableName: cargo
+            constraintName: cargo_origin_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+        - addForeignKeyConstraint:
+            baseColumnNames: next_expected_location_id
+            baseTableName: cargo
+            constraintName: cargo_next_expected_location_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+        - addForeignKeyConstraint:
+            baseColumnNames: spec_origin_id
+            baseTableName: cargo
+            constraintName: cargo_spec_origin_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+        - addUniqueConstraint:
+            columnNames: tracking_id
+            constraintName: cargo_tracking_id_unique
+            tableName: cargo
+
+#       LEG FK
+        - addForeignKeyConstraint:
+            baseColumnNames: voyage_id
+            baseTableName: leg
+            constraintName: leg_voyage_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: voyage
+        - addForeignKeyConstraint:
+            baseColumnNames: cargo_id
+            baseTableName: leg
+            constraintName: leg_cargo_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: cargo
+        - addForeignKeyConstraint:
+            baseColumnNames: unload_location_id
+            baseTableName: leg
+            constraintName: leg_unload_location_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+        - addForeignKeyConstraint:
+            baseColumnNames: load_location_id
+            baseTableName: leg
+            constraintName: leg_load_location_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+
+#       CARRIER_MOVEMENT FK
+        - addForeignKeyConstraint:
+            baseColumnNames: voyage_id
+            baseTableName: carrier_movement
+            constraintName: carrier_movement_voyage_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: voyage
+        - addForeignKeyConstraint:
+            baseColumnNames: departure_location_id
+            baseTableName: carrier_movement
+            constraintName: carrier_movement_departure_location_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location
+        - addForeignKeyConstraint:
+            baseColumnNames: arrival_location_id
+            baseTableName: carrier_movement
+            constraintName: carrier_movement_arrival_location_id_fkey
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: location

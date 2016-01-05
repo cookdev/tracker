@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: Cargoaggregation
+  cloud:
+    config:
+      uri: http://localhost:8889
+  boot:
+    admin:
+      url: http://localhost:58001
+  profiles:
+    active: package

@@ -1,0 +1,93 @@
+databaseChangeLog:      
+  - changeSet:
+      id: 1
+      author: anyframe
+      changes:
+        - createTable:
+            tableName: booking
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: booking_id
+                  type: varchar(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: tracking_id
+                  type: varchar(255)
+              - column:
+                  name: origin_id
+                  type: bigint
+              - column:
+                  name: destination_id
+                  type: bigint
+              - column:
+                  name: arrival_deadline
+                  type: datetime
+              - column:
+                  name: user_id
+                  type: varchar(255)
+              - column:
+                  name: commodity
+                  type: varchar(255)
+              - column:
+                  name: quantity
+                  type: int
+              - column:
+                  name: booking_status
+                  type: varchar(255)
+        - createTable:
+            tableName: location
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+              - column:
+                  name: unlocode
+                  type: varchar(255)
+        - createSequence:
+            incrementBy: 1
+            schemaName: public
+            sequenceName: hibernate_sequence
+            startValue: 8
+
+        - addForeignKeyConstraint:
+            baseColumnNames: destination_id
+            baseTableName: booking
+            constraintName: booking_destination_id_fkey
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: location
+        - addForeignKeyConstraint:
+            baseColumnNames: origin_id
+            baseTableName: booking
+            constraintName: booking_origin_id_fkey
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: id
+            referencedTableName: location
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/location.csv
+            schemaName: public
+            separator: ;
+            tableName: location
+        - loadData:
+            encoding: UTF-8
+            file: classpath:/db/changelog/booking.csv
+            schemaName: public
+            separator: ;
+            tableName: booking

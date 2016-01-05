@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+	<appender name="dailyRolling" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>\var\log\tomcat7\currentLog.log</file>
+		
+		 <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+             <fileNamePattern>\var\log\tomcat7\access.%d{yyyy-MM-dd}.log</fileNamePattern>
+             <maxHistory>30</maxHistory>
+        </rollingPolicy> 
+        
+		<encoder class="ch.qos.logback.access.PatternLayoutEncoder">
+			<charset>utf-8</charset>
+<!-- 		<pattern>%h %l %u [%t] "%r" %s %b "%i{Referer}" "%i{User-Agent}" %D </pattern>-->
+			<pattern>[%i{x-forwarded-for}][%i{x-netflix-httpclientname}][%l][%u][%t{yyyy-MM-dd HH:mm:ss}][%r][%s][%b][%i{Referer}][%i{User-Agent}"][%D]</pattern>
+		</encoder>
+	</appender>
+
+	<appender-ref ref="dailyRolling" />
+
+</configuration>

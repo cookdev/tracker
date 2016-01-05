@@ -1,0 +1,44 @@
+server:
+  port: 9999
+
+zuul:
+  ignored-services: "*"
+  routes:
+    OAuth2Service:
+      path: /auth/**
+      service-id: AuthServer
+      url: http://localhost:8070
+      strip-prefix: true
+    BookingService:
+      path: /booking/**
+      serviceId: Cargobooking
+      stripPrefix: true
+    CargoTrackerService:
+      path: /tracker/**
+      serviceId: Cargotracker
+      stripPrefix: true
+    PathfinderService: 
+      path: /pathfinder/**
+      serviceId: Pathfinder
+      stripPrefix: true
+    CargoUserService: 
+      path: /user/**
+      serviceId: Cargouser
+      stripPrefix: true
+    CargoAggregationService: 
+      path: /aggregation/**
+      serviceId: Cargoaggregation
+      stripPrefix: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: false
+---
+spring:
+  profiles: local
+---
+spring:
+  profiles: staging
