@@ -96,7 +96,7 @@ public class Cargo implements Serializable {
     private static final long serialVersionUID = 1L;
     // Auto-generated surrogate key
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id; // PK
     @Embedded
     private TrackingId trackingId;

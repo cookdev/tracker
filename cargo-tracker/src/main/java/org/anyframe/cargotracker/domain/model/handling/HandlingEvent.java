@@ -39,7 +39,7 @@ public class HandlingEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     @Enumerated(EnumType.STRING)
     @NotNull
@@ -88,7 +88,7 @@ public class HandlingEvent implements Serializable {
          * @param voyageRequired whether or not a voyage is associated with this
          * event type
          */
-        private Type(boolean voyageRequired) {
+        Type(boolean voyageRequired) {
             this.voyageRequired = voyageRequired;
         }
 

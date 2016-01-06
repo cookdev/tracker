@@ -1,14 +1,14 @@
 id;name;unlocode
-1;Hong Kong;CNHKG
-2;Melbourne;AUMEL
-3;Stockholm;SESTO
-4;Helsinki;FIHEL
-5;Chicago;USCHI
-6;Tokyo;JNTKO
-7;Hamburg;DEHAM
-8;Shanghai;CNSHA
-9;Rotterdam;NLRTM
-10;Guttenburg;SEGOT
-11;Hangzhou;CNHGH
-12;New York;USNYC
-13;Dallas;USDAL
+6;Hong Kong;CNHKG
+7;Melbourne;AUMEL
+8;Stockholm;SESTO
+9;Helsinki;FIHEL
+10;Chicago;USCHI
+11;Tokyo;JNTKO
+12;Hamburg;DEHAM
+13;Shanghai;CNSHA
+14;Rotterdam;NLRTM
+15;Guttenburg;SEGOT
+16;Hangzhou;CNHGH
+17;New York;USNYC
+18;Dallas;USDAL

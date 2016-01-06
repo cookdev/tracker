@@ -2,6 +2,8 @@ package org.anyframe.cloud;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -13,6 +15,8 @@ import java.security.NoSuchAlgorithmException;
 @SpringApplicationConfiguration(classes = CargoTrackerUserApplication.class)
 @WebAppConfiguration
 public class CargoTrackerUserApplicationTests {
+
+	private static final Logger logger = LoggerFactory.getLogger(CargoTrackerUserApplicationTests.class);
 
 	@Test
 	public void contextLoads() {
@@ -35,6 +39,6 @@ public class CargoTrackerUserApplicationTests {
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} 
-		System.out.println(after);
+		logger.info(after);
 	}
 }

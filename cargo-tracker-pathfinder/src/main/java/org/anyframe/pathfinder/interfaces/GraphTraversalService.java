@@ -1,6 +1,8 @@
 package org.anyframe.pathfinder.interfaces;
 
 import org.anyframe.pathfinder.infrastructure.GraphDao;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +23,8 @@ public class GraphTraversalService {
     
     private static final long ONE_DAY_MS = ONE_MIN_MS * 60 * 24;
 
+    private static final Logger logger = LoggerFactory.getLogger(GraphTraversalService.class);
+
     @RequestMapping(value="/shortest-path", method=RequestMethod.GET)
     public TransitPaths findShortestPath(
 //            @NotNull @Size(min = 5, max = 5) 
@@ -29,7 +33,7 @@ public class GraphTraversalService {
             @RequestParam(value="destination", required=true) String destinationUnLocode,
             @RequestParam(value="deadline", required=false) String deadline) {
     	
-    	System.out.println("#### Pathfinder #1 called");
+    	logger.debug("#### Pathfinder #1 called");
         Date date = nextDate(new Date());
 
         List<String> allVertices = dao.listLocations();

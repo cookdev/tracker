@@ -5,6 +5,8 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import org.anyframe.gateway.auth.authentication.exception.AuthorizationException;
 import org.anyframe.gateway.auth.authentication.exception.HttpClientError;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
@@ -31,7 +33,9 @@ public class CheckAccessTokenFilter extends ZuulFilter {
 
 	@Value("${anyframe.cloud.auth.checkTokenUrl}")
 	private String checkTokenUrl;
-			
+
+	private static final Logger logger = LoggerFactory.getLogger(CheckAccessTokenFilter.class);
+
 	@Override
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
@@ -43,10 +47,10 @@ public class CheckAccessTokenFilter extends ZuulFilter {
 			}
 			String[] bearer_token = authHeader.trim().split(" ");
 			String accessToken = bearer_token[bearer_token.length-1];
-			System.out.println("##### Token Validation ##### Start");
+			logger.debug("##### Token Validation ##### Start");
 			ResponseEntity<String> exchange = restTemplate.exchange(checkTokenUrl, HttpMethod.GET, null, String.class, accessToken);
-			System.out.println("##### Token Validation ##### Code : " + exchange.getStatusCode().value());
-			System.out.println("##### Token Validation ##### Body : " + exchange.getBody());
+			logger.debug("##### Token Validation ##### Code : " + exchange.getStatusCode().value());
+			logger.debug("##### Token Validation ##### Body : " + exchange.getBody());
 		} catch (HttpClientErrorException e){
 			HttpClientError clientError = null;
 			try {
@@ -66,12 +70,8 @@ public class CheckAccessTokenFilter extends ZuulFilter {
 	public boolean shouldFilter() {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletRequest request = ctx.getRequest();
-		
-//		if(request.getRequestURI().equals("/auth"+authServerConfig.getGetTokenUrl().split("\\?")[0])){
-		if(request.getRequestURI().startsWith("/auth/oauth")){
-			return false;
-		}
-		return true;
+
+		return !request.getRequestURI().startsWith("/auth/oauth");
 	}
 
 	@Override

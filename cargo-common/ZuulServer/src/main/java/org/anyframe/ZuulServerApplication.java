@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.anyframe.gateway.auth.authentication.filter.FilterResponseErrorHandler;
 import org.anyframe.gateway.core.filter.PreZuulFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,13 +23,12 @@ import java.util.List;
 @SpringBootApplication
 public class ZuulServerApplication {
 
-	@Value("${app.mode}")
-	private static String current;
+	private static final Logger logger = LoggerFactory.getLogger(ZuulServerApplication.class);
 
     public static void main(String[] args) {
 
 		SpringApplication.run(ZuulServerApplication.class, args);
-		System.out.println("################" + current);
+		logger.info("Zuul Server가 구동되었습니다.");
     }
 
 	@Bean

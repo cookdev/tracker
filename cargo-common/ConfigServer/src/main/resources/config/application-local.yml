@@ -10,6 +10,7 @@ anyframe:
     auth:
       tokenUrl: http://localhost:8070/oauth/token?grant_type={grantType}
       checkTokenUrl: http://localhost:8070/oauth/check_token?token={access_token}
+      registerUrl: http://localhost:8070/oauth/check_token?token={access_token}
 
 eureka:
   client:

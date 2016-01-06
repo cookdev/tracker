@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -42,6 +44,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringApplicationConfiguration(classes=CargoTrackerSpringApplication.class)
 @WebAppConfiguration
 public class CargoTrackerIntegrationTests {
+
+	private static final Logger logger = LoggerFactory.getLogger(CargoTrackerIntegrationTests.class);
 	
 	@Mock
 	private RoutingService mockRoutingService;
@@ -130,7 +134,7 @@ public class CargoTrackerIntegrationTests {
 		// listAllCargos
 		String listAllCargosResultJson = this.mvc.perform(get("/cargos"))
 				.andReturn().getResponse().getContentAsString();
-		System.out.println("$$$$ listAllCargosResult : " + listAllCargosResultJson);
+		logger.info("$$$$ listAllCargosResult : " + listAllCargosResultJson);
 		// listAllCargos result check
 		List<?> listAllCargosResultList = (List<?>)par.parse(listAllCargosResultJson);
 		// listNotAcceptedBookings result check
@@ -143,7 +147,7 @@ public class CargoTrackerIntegrationTests {
 				.content(TestUtils.asJsonString(newCargo))
 				.contentType(MediaType.APPLICATION_JSON)
 				.accept(MediaType.APPLICATION_JSON)).andReturn().getResponse().getContentAsString();
-		System.out.println("$$$$ newTrackingId : " + this.newTrackingId);
+		logger.info("$$$$ newTrackingId : " + this.newTrackingId);
 		// registerBooking result check
 		assertNotNull("registerCargo should return trackingId", this.newTrackingId);
 		
@@ -152,7 +156,7 @@ public class CargoTrackerIntegrationTests {
 		// getCargo
 		String getCargoResultJson = this.mvc.perform(get("/cargos/"+this.newTrackingId))
 				.andReturn().getResponse().getContentAsString();
-		System.out.println("$$$$ getCargo : " + getCargoResultJson);
+		logger.info("$$$$ getCargo : " + getCargoResultJson);
 		// getCargo result check
 		Map<String, String> getCargoResultMap = (Map<String, String>)par.parse(getCargoResultJson);
 		assertEquals("Before assignItinerary, booking's routed would be false", getCargoResultMap.get("routed"), false);
@@ -171,7 +175,7 @@ public class CargoTrackerIntegrationTests {
 				.content("{\"trackingId\": \"" + this.newTrackingId + "\", \"destinationUnlocode\": \"" + this.destinationLoCode + "\"}"));
 		// changeDestination result check
 		jsonResult = this.mvc.perform(get("/cargos/" + this.newTrackingId)).andReturn().getResponse().getContentAsString();
-		System.out.println("changeDestination Result : " + jsonResult);
+		logger.info("changeDestination Result : " + jsonResult);
 		map = (Map<String,String>)par.parse(jsonResult);
 
 		assertEquals("Change Destination Result would be Hong Kong (CNHKG)", "Hong Kong (CNHKG)", map.get("finalDestination"));			
@@ -181,7 +185,7 @@ public class CargoTrackerIntegrationTests {
 		String getRouteCandidatesResultJson = this.mvc.perform(get("/cargos/candidates")
 				.param("trackingId", this.newTrackingId))
 				.andReturn().getResponse().getContentAsString();
-		System.out.println("$$$$ getRouteCandidates : " + getRouteCandidatesResultJson);
+		logger.info("$$$$ getRouteCandidates : " + getRouteCandidatesResultJson);
 		List<?> getRouteCandidatesResultList = (List<?>)par.parse(getRouteCandidatesResultJson);
 		
 		assertTrue("getRouteCandidates would return Itineraries list", getRouteCandidatesResultList.size()>0);

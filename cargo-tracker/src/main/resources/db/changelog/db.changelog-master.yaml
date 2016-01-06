@@ -204,7 +204,7 @@ databaseChangeLog:
             incrementBy: 1
             schemaName: public
             sequenceName: hibernate_sequence
-            startValue: 8
+            startValue: 63
 
 #       Load CSV
         - loadData:

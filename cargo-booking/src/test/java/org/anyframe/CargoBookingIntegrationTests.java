@@ -13,6 +13,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -40,6 +42,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringApplicationConfiguration(classes = CargoBookingApplication.class)
 @WebAppConfiguration
 public class CargoBookingIntegrationTests {
+
+	private static final Logger logger = LoggerFactory.getLogger(CargoBookingIntegrationTests.class);
 
 	@Mock
 	private CargoTrackerService mockCargoTrackerService;
@@ -116,7 +120,7 @@ public class CargoBookingIntegrationTests {
 		// listUserBookings
 		String listUserBookingsResultJson = this.mvc.perform(get("/bookings/of/" + this.userId))
 				.andReturn().getResponse().getContentAsString();
-		System.out.println("$$$$ listUserBookingsResult : " + listUserBookingsResultJson);
+		logger.info("$$$$ listUserBookingsResult : " + listUserBookingsResultJson);
 		// listUserBookings result check
 		List<?> listUserBookingsResultList = (List<?>)par.parse(listUserBookingsResultJson);
 		Map<String, String> listUserBookingsResultMap = (Map<String, String>) listUserBookingsResultList.get(0);
@@ -129,7 +133,7 @@ public class CargoBookingIntegrationTests {
 		// listNotAcceptedBookings
 		String listNotAcceptedBookingsResultJson = this.mvc.perform(get("/bookings/not-accepted"))
 				.andReturn().getResponse().getContentAsString();
-		System.out.println("$$$$ listNotAcceptedBookingsResult : " + listNotAcceptedBookingsResultJson);
+		logger.info("$$$$ listNotAcceptedBookingsResult : " + listNotAcceptedBookingsResultJson);
 		List<?> listNotAcceptedBookingsResultList = (List<?>)par.parse(listNotAcceptedBookingsResultJson);
 		// listNotAcceptedBookings result check
 		assertTrue("listNotAcceptedBookings should return at least one of bookings", listNotAcceptedBookingsResultList.size()>=1);
@@ -139,7 +143,7 @@ public class CargoBookingIntegrationTests {
 		// getBookingDetail
 		String getBookingDetailResultJson = this.mvc.perform(get("/bookings/"+this.bookingId))
 				.andReturn().getResponse().getContentAsString();
-		System.out.println("$$$$ getBookingDetail : " + getBookingDetailResultJson);
+		logger.info("$$$$ getBookingDetail : " + getBookingDetailResultJson);
 		// getBookingDetailResultJson result check 
 		// Current booking information check, before changeDestination and acceptBooking
 		Map<String, String> getBookingDetailResultMap = (Map<String, String>)par.parse(getBookingDetailResultJson);

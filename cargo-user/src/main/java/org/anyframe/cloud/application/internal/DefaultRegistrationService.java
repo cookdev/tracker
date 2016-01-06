@@ -5,20 +5,26 @@ import org.anyframe.cloud.application.RegistrationService;
 import org.anyframe.cloud.domain.RegisteredUser;
 import org.anyframe.cloud.domain.UserAccount;
 import org.anyframe.cloud.util.IdGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-//import org.anyframe.cloud.application.exception._PasswordNotValid;
-
 @Service
 public class DefaultRegistrationService extends CommonService implements RegistrationService {
-	
+
+	@Value("${anyframe.cloud.auth.registerUrl}")
+	private String registerUrl;
+
 	@Autowired
 	private RestTemplate springRestTemplate;
+
+	private static final Logger logger = LoggerFactory.getLogger(DefaultRegistrationService.class);
 
 	@Override
 	public String registerNewUser(RegisteredUser registeredUser, String password) {
@@ -29,10 +35,10 @@ public class DefaultRegistrationService extends CommonService implements Registr
 		UserAccount userAccount = new UserAccount(registeredUser.getLoginName(), password, registeredUser.getEmailAddress());
 		HttpEntity<UserAccount> requestEntity = new HttpEntity<UserAccount>(userAccount);
 		ResponseEntity<String> result = null;
-		result = springRestTemplate.exchange("http://70.121.244.13:8070/auth/api/register", HttpMethod.POST, requestEntity, String.class);
+		result = springRestTemplate.exchange(registerUrl, HttpMethod.POST, requestEntity, String.class);
 
 		if(!result.getStatusCode().is2xxSuccessful()){
-			System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + result.getBody());
+			logger.debug("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + result.getBody());
 		}
 		
 		registeredUserRepository.save(registeredUser);
