@@ -1,12 +1,12 @@
 package org.anyframe.cloud.auth.service;
 
-import org.anyframe.cloud.auth.domain.Authority;
 import org.anyframe.cloud.auth.domain.User;
 import org.anyframe.cloud.auth.repository.AuthorityRepository;
 import org.anyframe.cloud.auth.repository.UserRepository;
-import org.anyframe.cloud.cmm.security.util.SecurityUtils;
-import org.anyframe.cloud.cmm.service.util.IdGenerator;
-import org.anyframe.cloud.cmm.service.util.RandomUtil;
+import org.anyframe.cloud.auth.common.service.util.IdGenerator;
+import org.anyframe.cloud.auth.common.service.util.RandomUtil;
+import org.anyframe.cloud.auth.domain.Authority;
+import org.anyframe.cloud.auth.common.security.util.SecurityUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +46,7 @@ public class UserService {
     @Inject
     private AuthorityService authorityService;
 
-    public  User activateRegistration(String key) {
+    public User activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
         User user = userRepository.findOneByActivationKey(key);
         // activate given user for the registration key.

@@ -2,7 +2,7 @@ package org.anyframe.cloud.auth.config;
 
 import org.anyframe.cloud.auth.security.AjaxLogoutSuccessHandler;
 import org.anyframe.cloud.auth.security.oauth2.ScopeFilteredAccessTokenConverter;
-import org.anyframe.cloud.cmm.security.Http401UnauthorizedEntryPoint;
+import org.anyframe.cloud.auth.common.security.Http401UnauthorizedEntryPoint;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

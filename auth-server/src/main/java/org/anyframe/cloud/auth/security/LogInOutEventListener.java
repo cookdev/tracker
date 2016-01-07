@@ -1,8 +1,8 @@
 package org.anyframe.cloud.auth.security;
 
+import org.anyframe.cloud.auth.repository.UserEventHistoryRepository;
 import org.anyframe.cloud.auth.domain.User;
 import org.anyframe.cloud.auth.domain.UserEventHistory;
-import org.anyframe.cloud.auth.repository.UserEventHistoryRepository;
 import org.anyframe.cloud.auth.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +27,7 @@ public class LogInOutEventListener implements ApplicationListener<AbstractAuthen
 	private UserRepository userRepository;
 
 	@Inject
-	private UserEventHistoryRepository userEventHistoryRepository;	
+	private UserEventHistoryRepository userEventHistoryRepository;
 	
 	@Transactional(propagation=Propagation.REQUIRES_NEW)
 	@Override

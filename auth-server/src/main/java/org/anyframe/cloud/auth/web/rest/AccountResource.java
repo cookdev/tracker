@@ -1,14 +1,14 @@
 package org.anyframe.cloud.auth.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.anyframe.cloud.auth.service.AuthorityService;
+import org.anyframe.cloud.auth.web.rest.dto.*;
 import org.anyframe.cloud.auth.domain.Authority;
 import org.anyframe.cloud.auth.domain.User;
 import org.anyframe.cloud.auth.repository.UserRepository;
 import org.anyframe.cloud.auth.service.AccountService;
-import org.anyframe.cloud.auth.service.AuthorityService;
 import org.anyframe.cloud.auth.service.UserService;
-import org.anyframe.cloud.auth.web.rest.dto.*;
-import org.anyframe.cloud.cmm.security.util.SecurityUtils;
+import org.anyframe.cloud.auth.common.security.util.SecurityUtils;
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -42,7 +42,7 @@ public class AccountResource {
     private UserService userService;
     
     @Inject
-    private AuthorityService authorityService;    
+    private AuthorityService authorityService;
     
     @Inject
     private AccountService accountService;

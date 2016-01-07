@@ -1,8 +1,8 @@
 package org.anyframe.cloud.auth.service.admin;
 
-import org.anyframe.cloud.auth.domain.Authority;
 import org.anyframe.cloud.auth.domain.User;
 import org.anyframe.cloud.auth.service.AuthorityService;
+import org.anyframe.cloud.auth.domain.Authority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -20,7 +20,7 @@ import java.util.Set;
  */
 @Service
 @Transactional
-public class AdminAuthorityService extends AuthorityService{
+public class AdminAuthorityService extends AuthorityService {
 
 	private final Logger log = LoggerFactory.getLogger(AdminAuthorityService.class);
 	

@@ -1,8 +1,8 @@
 package org.anyframe.cloud.auth.security;
 
-import org.anyframe.cloud.auth.domain.Authority;
 import org.anyframe.cloud.auth.domain.User;
 import org.anyframe.cloud.auth.repository.UserRepository;
+import org.anyframe.cloud.auth.domain.Authority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;

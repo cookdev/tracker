@@ -2,12 +2,12 @@ package org.anyframe.cloud.auth.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.wordnik.swagger.annotations.ApiParam;
+import org.anyframe.cloud.auth.service.AuthorityService;
 import org.anyframe.cloud.auth.domain.Authority;
 import org.anyframe.cloud.auth.domain.User;
-import org.anyframe.cloud.auth.service.AuthorityService;
 import org.anyframe.cloud.auth.web.rest.dto.GrantAuthoritiesDTO;
 import org.anyframe.cloud.auth.web.rest.dto.UserDTOIncludeRoles;
-import org.anyframe.cloud.cmm.web.rest.util.PaginationUtil;
+import org.anyframe.cloud.auth.common.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -33,7 +33,7 @@ public class AuthorityResource {
 	private final Logger log = LoggerFactory.getLogger(AuthorityResource.class);
     
     @Inject
-    private AuthorityService authorityService;    
+    private AuthorityService authorityService;
 
     /**
      * GET  /authorities/granted -> get granted authorities.

@@ -20,7 +20,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>org.anyframe.cloud.CargoTrackerUserApplication</start-class>
+		<start-class>org.anyframe.cloud.cargo.user.CargoUserApplication</start-class>
 		<java.version>1.7</java.version>
 		<spring-cloud.version>Angel.SR3</spring-cloud.version>
 	</properties>

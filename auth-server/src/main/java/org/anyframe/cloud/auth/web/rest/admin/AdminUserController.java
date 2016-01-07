@@ -4,7 +4,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.anyframe.cloud.auth.domain.User;
 import org.anyframe.cloud.auth.repository.UserRepository;
-import org.anyframe.cloud.cmm.web.rest.util.PaginationUtil;
+import org.anyframe.cloud.auth.common.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
