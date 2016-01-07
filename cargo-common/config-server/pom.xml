@@ -19,7 +19,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>org.anyframe.ConfigServerApplication</start-class>
+		<start-class>org.anyframe.cloud.common.config.ConfigServerApplication</start-class>
 		<spring-cloud.version>Angel.SR3</spring-cloud.version>
 	</properties>
 

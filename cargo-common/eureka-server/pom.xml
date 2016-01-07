@@ -31,7 +31,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>org.anyframe.eureka.EurekaApplication</start-class>
+		<start-class>org.anyframe.cloud.common.eureka.EurekaApplication</start-class>
 		<java.version>1.7</java.version>
 	</properties>
 
