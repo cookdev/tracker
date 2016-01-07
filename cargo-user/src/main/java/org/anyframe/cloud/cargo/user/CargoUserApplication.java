@@ -38,7 +38,7 @@ public class CargoUserApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CargoUserApplication.class, args);
-		logger.info("Cargo User Service가 구동되었습니다.");
+		logger.info("Cargo User Service is started ================================");
 	}
 
 	@Bean

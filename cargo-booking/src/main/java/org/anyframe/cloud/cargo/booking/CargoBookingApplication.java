@@ -24,7 +24,7 @@ public class CargoBookingApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CargoBookingApplication.class, args);
-		logger.info("Cargo Tracker Booking Service가 구동되었습니다.");
+		logger.info("Cargo Tracker Booking Service is started ================================");
     }
     
     @Bean

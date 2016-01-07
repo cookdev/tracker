@@ -23,7 +23,7 @@ public class CargoTrackerPathfinderApplication {
     public static void main(String[] args) {
 
         SpringApplication.run(CargoTrackerPathfinderApplication.class, args);
-		logger.info("Cargo Tracker Pathfinder Service가 구동되었습니다.");
+		logger.info("Cargo Tracker Pathfinder Service is started ================================");
     }
     
     @Bean

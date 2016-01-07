@@ -12,6 +12,6 @@ public class CargoUiDeviceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CargoUiDeviceApplication.class, args);
-        logger.info("Device UI가 구동되었습니다.");
+        logger.info("Device UI is started ================================");
     }
 }

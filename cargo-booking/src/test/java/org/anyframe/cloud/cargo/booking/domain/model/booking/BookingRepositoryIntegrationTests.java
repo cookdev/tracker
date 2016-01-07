@@ -1,6 +1,6 @@
 package org.anyframe.cloud.cargo.booking.domain.model.booking;
 
-import org.anyframe.CargoBookingApplication;
+import org.anyframe.cloud.cargo.booking.CargoBookingApplication;
 import org.anyframe.cloud.cargo.booking.domain.model.location.Location;
 import org.anyframe.cloud.cargo.booking.domain.model.location.LocationRepository;
 import org.anyframe.cloud.cargo.booking.domain.model.location.UnLocode;

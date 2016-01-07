@@ -38,7 +38,7 @@ public class CargoTrackerApplication {
     public static void main(String[] args) {
 
 		SpringApplication.run(CargoTrackerApplication.class, args);
-		logger.info("Cargo Tracker Service가 구동되었습니다.");
+		logger.info("Cargo Tracker Service is started ================================");
     }
     
     

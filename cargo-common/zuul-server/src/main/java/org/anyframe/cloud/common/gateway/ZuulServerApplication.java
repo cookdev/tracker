@@ -27,7 +27,7 @@ public class ZuulServerApplication {
     public static void main(String[] args) {
 
 		SpringApplication.run(ZuulServerApplication.class, args);
-		logger.info("Zuul Server가 구동되었습니다.");
+		logger.info("Zuul Server is started ================================");
     }
 
 	@Bean

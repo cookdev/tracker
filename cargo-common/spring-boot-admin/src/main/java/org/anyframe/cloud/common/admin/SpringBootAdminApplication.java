@@ -16,6 +16,6 @@ public class SpringBootAdminApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringBootAdminApplication.class, args);
-        logger.info("Spring Boot Admin이 구동되었습니다.");
+        logger.info("Spring Boot Admin is started ================================");
     }
 }

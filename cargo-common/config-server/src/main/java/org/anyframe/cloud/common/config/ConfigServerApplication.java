@@ -16,7 +16,7 @@ public class ConfigServerApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ConfigServerApplication.class, args);
-        logger.info("Config Server가 구동되었습니다.");
+        logger.info("Config Server is started ================================");
     }
     
 }

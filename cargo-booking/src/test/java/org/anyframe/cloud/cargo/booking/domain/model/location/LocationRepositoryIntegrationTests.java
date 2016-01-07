@@ -1,6 +1,6 @@
 package org.anyframe.cloud.cargo.booking.domain.model.location;
 
-import org.anyframe.CargoBookingApplication;
+import org.anyframe.cloud.cargo.booking.CargoBookingApplication;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

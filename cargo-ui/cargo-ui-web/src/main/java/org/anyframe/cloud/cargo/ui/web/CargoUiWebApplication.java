@@ -12,6 +12,6 @@ public class CargoUiWebApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CargoUiWebApplication.class, args);
-        logger.info("Web UI가 구동되었습니다.");
+        logger.info("Web UI is started ================================");
     }
 }

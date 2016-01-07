@@ -22,7 +22,7 @@ public class CargoAggregationApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CargoAggregationApplication.class, args);
-		logger.info("Cargo Tracker Aggregation Service가 구동되었습니다.");
+		logger.info("Cargo Tracker Aggregation Service is started ================================");
     }
     
     @Bean
