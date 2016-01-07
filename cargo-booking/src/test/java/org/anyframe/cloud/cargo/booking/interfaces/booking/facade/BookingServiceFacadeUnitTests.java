@@ -1,6 +1,6 @@
 package org.anyframe.cloud.cargo.booking.interfaces.booking.facade;
 
-import org.anyframe.CargoBookingApplication;
+import org.anyframe.cloud.cargo.booking.CargoBookingApplication;
 import org.anyframe.cloud.cargo.booking.application.BookingService;
 import org.anyframe.cloud.cargo.booking.domain.model.booking.Booking;
 import org.anyframe.cloud.cargo.booking.domain.model.booking.BookingId;
