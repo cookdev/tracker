@@ -1,12 +1,12 @@
 package org.anyframe.cloud.auth.web.rest.admin;
 
 import com.codahale.metrics.annotation.Timed;
-import com.wordnik.swagger.annotations.ApiOperation;
 import org.anyframe.cloud.auth.domain.User;
 import org.anyframe.cloud.auth.repository.UserRepository;
 import org.anyframe.cloud.auth.common.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
@@ -29,16 +28,15 @@ public class AdminUserController {
 
     private final Logger log = LoggerFactory.getLogger(AdminUserController.class);
 
-    @Inject
+    @Autowired
     private UserRepository userRepository;
     
-    @Inject
+    @Autowired
     private PasswordEncoder passwordEncoder;
     
     /**
      * POST  /users -> create or update users.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/users",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)
@@ -89,7 +87,6 @@ public class AdminUserController {
     /**
      * DELETE  /users -> delete users.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/users",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -107,7 +104,6 @@ public class AdminUserController {
     /**
      * GET  /users -> get all users.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/users",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

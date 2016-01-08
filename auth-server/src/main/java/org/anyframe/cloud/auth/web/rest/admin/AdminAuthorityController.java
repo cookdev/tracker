@@ -1,7 +1,6 @@
 package org.anyframe.cloud.auth.web.rest.admin;
 
 import com.codahale.metrics.annotation.Timed;
-import com.wordnik.swagger.annotations.ApiOperation;
 import org.anyframe.cloud.auth.domain.Authority;
 import org.anyframe.cloud.auth.domain.Client;
 import org.anyframe.cloud.auth.repository.AuthorityRepository;
@@ -9,12 +8,12 @@ import org.anyframe.cloud.auth.repository.ClientRepository;
 import org.anyframe.cloud.auth.service.admin.AdminAuthorityService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.util.*;
 
 /**
@@ -26,19 +25,18 @@ public class AdminAuthorityController {
     
 	private final Logger log = LoggerFactory.getLogger(AdminAuthorityController.class);
 
-    @Inject
+    @Autowired
     private AuthorityRepository authorityRepository;
     
-    @Inject
+    @Autowired
     private ClientRepository clientRepository;
 
-    @Inject
+    @Autowired
     private AdminAuthorityService adminAuthorityService;
     
     /**
      * POST  /authorities -> create or update authorities.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)
@@ -58,7 +56,6 @@ public class AdminAuthorityController {
     /**
      * DELETE  /authorities -> delete authorities.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities",
             method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -83,7 +80,6 @@ public class AdminAuthorityController {
     /**
      * GET  /authorities -> get all authorities.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -100,7 +96,6 @@ public class AdminAuthorityController {
     /**
      * GET  /authorities/grantableByMe -> get authorities grantable by.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities/grantableByMe",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -114,7 +109,6 @@ public class AdminAuthorityController {
     /**
      * GET  /authorities/grantableByMe/grantTo/{id} -> get authorities granted to an ID among authorities grantable by.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities/grantableByMe/grantTo/{id}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -129,7 +123,6 @@ public class AdminAuthorityController {
     /**
      * POST  /authorities/grantableByMe/grantTo/{id} -> grant authorities to user.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities/grantableByMe/grantTo/{id}",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)
@@ -146,7 +139,6 @@ public class AdminAuthorityController {
     /**
      * GET  /authorities/grantableByMe/clientGrantDefaultUserAuthorities/{clientId} -> get authorities as client grant default user client to an client ID among authorities grantable by.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities/grantableByMe/asClientGrantDefaultUserAuthoritiesTo/{clientId}",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -162,7 +154,6 @@ public class AdminAuthorityController {
     /**
      * POST  /authorities/grantableByMe/asClientGrantDefaultUserAuthoritiesTo/{clientId} -> set authorities as client grant default user client to an client ID among authorities grantable by.
      */
-    @ApiOperation(hidden=true, value = "ONLY FOR ADMIN MENU")
     @RequestMapping(value = "/authorities/grantableByMe/asClientGrantDefaultUserAuthoritiesTo/{clientId}",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)

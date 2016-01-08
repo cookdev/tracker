@@ -6,6 +6,7 @@ import org.anyframe.cloud.auth.domain.UserEventHistory;
 import org.anyframe.cloud.auth.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
@@ -16,17 +17,15 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
-
 @Component
 public class LogInOutEventListener implements ApplicationListener<AbstractAuthenticationEvent> {
 
 	private final Logger log = LoggerFactory.getLogger(LogInOutEventListener.class);
 	
-	@Inject
+	@Autowired
 	private UserRepository userRepository;
 
-	@Inject
+	@Autowired
 	private UserEventHistoryRepository userEventHistoryRepository;
 	
 	@Transactional(propagation=Propagation.REQUIRES_NEW)

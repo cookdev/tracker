@@ -10,6 +10,7 @@ import org.anyframe.cloud.auth.common.security.util.SecurityUtils;
 import org.anyframe.cloud.auth.common.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.inject.Inject;
 import java.util.*;
 
 /**
@@ -34,16 +34,16 @@ public class AuthorityService {
 
     private final Logger log = LoggerFactory.getLogger(AuthorityService.class);
 
-    @Inject
+    @Autowired
     protected AuthorityRepository authorityRepository;
     
-	@Inject
+	@Autowired
 	protected ClientRepository clientRepository;   
 	
-    @Inject
+    @Autowired
     protected UserRepository userRepository;
     
-    @Inject
+    @Autowired
     protected TokenStore tokenStore;    	
 	
 	protected static final String ROLE_DELIMITER_WITH_ESCAPE = "\\_";

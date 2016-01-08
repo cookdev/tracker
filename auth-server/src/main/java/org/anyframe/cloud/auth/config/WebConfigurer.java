@@ -2,11 +2,11 @@ package org.anyframe.cloud.auth.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import javax.inject.Inject;
 import javax.servlet.*;
 import java.util.Arrays;
 import java.util.EnumSet;
@@ -22,7 +22,7 @@ public class WebConfigurer implements ServletContextInitializer {
 
     private final Logger log = LoggerFactory.getLogger(WebConfigurer.class);
 
-    @Inject
+    @Autowired
     private Environment env;
 
 

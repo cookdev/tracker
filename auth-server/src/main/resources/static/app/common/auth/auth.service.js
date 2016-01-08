@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('sampleAdminWebApp')
-    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password) {
+    .factory('Auth', function Auth($rootScope, $state, $q, $translate, Principal, AuthServerProvider, Account, Register, Activate, Password, SHA256) {
         return {
             login: function (credentials, callback) {
                 var cb = callback || angular.noop;
                 var deferred = $q.defer();
 
-                var AuthServerProviderPromise = AuthServerProvider.login(credentials)
+                var AuthServerProviderPromise = AuthServerProvider.login(credentials);
                 
                 if(!AuthServerProviderPromise) return;
                 
@@ -106,6 +106,7 @@ angular.module('sampleAdminWebApp')
             changePassword: function (newPassword, callback) {
                 var cb = callback || angular.noop;
 
+                newPassword = SHA256.sha256_digest(newPassword);
                 return Password.save(newPassword, function () {
                     return cb();
                 }, function (err) {

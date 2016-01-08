@@ -10,6 +10,7 @@ import org.anyframe.cloud.auth.common.security.util.SecurityUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,9 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import javax.inject.Inject;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -34,16 +33,16 @@ public class UserService {
 	
     private final Logger log = LoggerFactory.getLogger(UserService.class);
 
-    @Inject
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Inject
+    @Autowired
     private UserRepository userRepository;
 
-    @Inject
+    @Autowired
     private AuthorityRepository authorityRepository;
     
-    @Inject
+    @Autowired
     private AuthorityService authorityService;
 
     public User activateRegistration(String key) {
@@ -175,29 +174,11 @@ public class UserService {
         changePassword(passwordNew);
         return true;
     }
-    
 
     @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
         User currentUser = userRepository.findOneByLogin(SecurityUtils.getCurrentLogin());
         if(null != currentUser) currentUser.getAuthorities().size(); // eagerly load the association
         return currentUser;
-    }
-
-    /**
-     * Not activated users should be automatically deleted after 3 days.
-     * <p/>
-     * <p>
-     * This is scheduled to get fired everyday, at 01:00 (am).
-     * </p>
-     */
-    //@Scheduled(cron = "0 0 1 * * ?")
-    public void removeNotActivatedUsers() {
-        DateTime now = new DateTime();
-        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minusDays(3));
-        for (User user : users) {
-            log.debug("Deleting not activated user {}", user.getLogin());
-            userRepository.delete(user);
-        }
     }
 }

@@ -3,6 +3,7 @@ package org.anyframe.cloud.auth.config;
 import org.anyframe.cloud.auth.security.AjaxLogoutSuccessHandler;
 import org.anyframe.cloud.auth.security.oauth2.ScopeFilteredAccessTokenConverter;
 import org.anyframe.cloud.auth.common.security.Http401UnauthorizedEntryPoint;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.inject.Inject;
 import javax.sql.DataSource;
 
 @Configuration
@@ -33,10 +33,10 @@ public class OAuth2ServerConfiguration {
     @EnableResourceServer
     protected static class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
-        @Inject
+        @Autowired
         private Http401UnauthorizedEntryPoint authenticationEntryPoint;
 
-        @Inject
+        @Autowired
         private AjaxLogoutSuccessHandler ajaxLogoutSuccessHandler;
 
 		@Override
@@ -95,7 +95,7 @@ public class OAuth2ServerConfiguration {
 
 
 
-        @Inject
+        @Autowired
         private DataSource dataSource;
 
         @Bean
@@ -103,7 +103,7 @@ public class OAuth2ServerConfiguration {
             return new JdbcTokenStore(dataSource);
         }
 
-        @Inject
+        @Autowired
         @Qualifier("authenticationManagerBean")
         private AuthenticationManager authenticationManager;
 

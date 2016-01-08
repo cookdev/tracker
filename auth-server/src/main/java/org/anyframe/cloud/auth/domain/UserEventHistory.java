@@ -20,7 +20,7 @@ public class UserEventHistory implements Serializable {
 	private static final long serialVersionUID = -2659916257852095668L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
 	@Column(name="username")

@@ -1,8 +1,6 @@
 package org.anyframe.cloud.auth.web.rest.type2;
 
 import com.codahale.metrics.annotation.Timed;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
 import org.anyframe.cloud.auth.service.AuthorityService;
 import org.anyframe.cloud.auth.web.rest.type2.dto.*;
 import org.anyframe.cloud.auth.domain.Authority;
@@ -14,12 +12,12 @@ import org.apache.commons.lang.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
@@ -36,13 +34,13 @@ public class Type2AccountResource {
 
     private final Logger log = LoggerFactory.getLogger(Type2AccountResource.class);
 
-    @Inject
+    @Autowired
     private UserRepository userRepository;
 
-    @Inject
+    @Autowired
     private UserService userService;
 
-    @Inject
+    @Autowired
     private AuthorityService authorityService;
     
    // @Inject
@@ -55,7 +53,6 @@ public class Type2AccountResource {
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-	@ApiOperation(response = Type2UserDTOForResponseActivationKey.class, value = "")
     public ResponseEntity<?> registerAccount(@Valid @RequestBody Type2UserDTOForRegister userDTO, HttpServletRequest request) {
         User user = userRepository.findOneByLogin(userDTO.getLogin());
         if (user != null) {
@@ -256,7 +253,7 @@ public class Type2AccountResource {
             produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
     public ResponseEntity<Type2GeneralResultResponseDTO> checkValidation(
-    		@ApiParam(name = "type", value = "\"login\" or \"email\"") @RequestParam(value = "type") String type, 
+    		@RequestParam(value = "type") String type,
     		@RequestParam("value") String value) {
     	log.debug("check {} validation : {}", type, value);
     	

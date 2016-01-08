@@ -5,6 +5,7 @@ import org.anyframe.cloud.auth.repository.UserRepository;
 import org.anyframe.cloud.auth.domain.Authority;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -24,7 +24,7 @@ public class UserDetailsService implements org.springframework.security.core.use
 
     private final Logger log = LoggerFactory.getLogger(UserDetailsService.class);
 
-    @Inject
+    @Autowired
     private UserRepository userRepository;
 
 	private static final int LOGIN_FAILURE_COUNT_THAT_YOUR_ACCOUNT_BE_LOCKED = 5;

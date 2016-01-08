@@ -1,7 +1,6 @@
 package org.anyframe.cloud.auth.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
-import com.wordnik.swagger.annotations.ApiParam;
 import org.anyframe.cloud.auth.service.AuthorityService;
 import org.anyframe.cloud.auth.domain.Authority;
 import org.anyframe.cloud.auth.domain.User;
@@ -10,6 +9,7 @@ import org.anyframe.cloud.auth.web.rest.dto.UserDTOIncludeRoles;
 import org.anyframe.cloud.auth.common.web.rest.util.PaginationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class AuthorityResource {
 
 	private final Logger log = LoggerFactory.getLogger(AuthorityResource.class);
     
-    @Inject
+    @Autowired
     private AuthorityService authorityService;
 
     /**
@@ -157,12 +156,7 @@ public class AuthorityResource {
     @Timed
     public ResponseEntity<?> grantAuthoritiesTo(@PathVariable("login") String login, 
     		@RequestParam(value="noRoleDeactived", defaultValue="false") boolean noRoleDeactived,
-    		@ApiParam(value=""
-    				+ "ex)<br>"
-    				+ "<i>[<br>"
-    				+ "&nbsp;&nbsp;{\"name\":\"ROLE_A\"},<br>"
-    				+ "&nbsp;&nbsp;{\"name\":\"ROLE_B\"}<br>"
-    				+ "]</i>") @RequestBody List<Authority> grantedAuthoritiesFromClient
+    		@RequestBody List<Authority> grantedAuthoritiesFromClient
     	){
 		boolean isSucceed = authorityService.saveUserAuthoritiesUnderMyAuthorities(login, grantedAuthoritiesFromClient, noRoleDeactived);    		
 		if(!isSucceed) {
@@ -180,19 +174,7 @@ public class AuthorityResource {
     @Timed
     public ResponseEntity<?> grantAuthoritiesTo(
     		@RequestParam(value="noRoleDeactived", defaultValue="false") boolean noRoleDeactived,
-    		@ApiParam(value=""
-    				+ "ex)<br>"
-    				+ "[&nbsp;{<br>"
-    				+ "&nbsp;&nbsp;\"login\":\"userA\",<br>"
-    				+ "&nbsp;&nbsp;\"roles\":[<br>"
-    				+ "&nbsp;&nbsp;&nbsp;\"ROLE_A\",<br>"
-    				+ "&nbsp;&nbsp;&nbsp;\"ROLE_B\"<br>"
-    				+ "&nbsp;&nbsp;]&nbsp;},&nbsp;{<br>"
-    				+ "&nbsp;&nbsp;\"login\":\"userB\",<br>"
-    				+ "&nbsp;&nbsp;\"roles\":[<br>"
-    				+ "&nbsp;&nbsp;&nbsp;\"ROLE_C\",<br>"
-    				+ "&nbsp;&nbsp;&nbsp;\"ROLE_D\"<br>"
-    				+ "]&nbsp;}&nbsp;]<br>") @RequestBody List<GrantAuthoritiesDTO> grantAuthoritiesDTOs
+    		@RequestBody List<GrantAuthoritiesDTO> grantAuthoritiesDTOs
     	){
     	String login;
     	List<Authority> grantedAuthoritiesFromClient;
