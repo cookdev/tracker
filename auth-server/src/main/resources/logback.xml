@@ -22,7 +22,7 @@
     <logger name="org.hibernate.SQL" level="DEBUG"/>             <!-- Hibernate SQL DML -->
     <logger name="org.hibernate.tool.hbm2ddl" level="DEBUG"/>    <!-- Hibernate SQL DDL -->
     <logger name="org.hibernate.type" level="TRACE"/>            <!-- Hibernate JDBC parameters -->
-<!--  
+
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
     <logger name="javax.xml.bind" level="WARN"/>
@@ -37,7 +37,6 @@
     <logger name="org.bson" level="WARN"/>
     <logger name="org.hibernate.validator" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
-    <logger name="org.hibernate.ejb.HibernatePersistence" level="OFF"/>
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.springframework.web" level="WARN"/>
     <logger name="org.springframework.security" level="WARN"/>
@@ -52,7 +51,7 @@
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
--->
+
     <root level="TRACE">
         <appender-ref ref="CONSOLE"/>
     </root>
