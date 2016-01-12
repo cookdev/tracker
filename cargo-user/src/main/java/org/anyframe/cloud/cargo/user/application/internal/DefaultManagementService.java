@@ -65,9 +65,8 @@ public class DefaultManagementService extends CommonService implements Managemen
 	@Override
 	public void modifyUser(RegisteredUser registeredUser) {
 		
-		RegisteredUser before = registeredUserRepository.findByEmailAddress(registeredUser.getEmailAddress());
+		RegisteredUser before = registeredUserRepository.findByLoginName(registeredUser.getLoginName());
 		registeredUser.setId(before.getId());
-//		registeredUser.setPassword(before.getPassword());
 		
 		registeredUserRepository.save(registeredUser);
 	}

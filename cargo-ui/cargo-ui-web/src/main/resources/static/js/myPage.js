@@ -45,7 +45,6 @@ page.MyPage = (function(){
 		},
 		
 		resetView: function(){
-
 			$(ENV.FORM_ID).find(ENV.FORM_UNAME).attr('disabled', true);
 			$(ENV.FORM_ID).find(ENV.FORM_UNAME).parent().show();
 			$(ENV.FORM_ID).find(ENV.FORM_EMAIL).attr('disabled', true);
@@ -70,10 +69,10 @@ page.MyPage = (function(){
 			if(comm.isUndefined(comm.I.mobilePhoneNo) || comm.I.mobilePhoneNo === null){
 				comm.I.mobilePhoneNo = "+8210";
 			}
-			$(ENV.FORM_ID).find(ENV.FORM_NO1).val(comm.I.mobilePhoneNo.substring(0,3));
-			$(ENV.FORM_ID).find(ENV.FORM_NO2).val(comm.I.mobilePhoneNo.substring(3,5));
-			$(ENV.FORM_ID).find(ENV.FORM_NO3).val(comm.I.mobilePhoneNo.substring(5,9));
-			$(ENV.FORM_ID).find(ENV.FORM_NO4).val(comm.I.mobilePhoneNo.substring(9));
+			$(ENV.FORM_ID).find(ENV.FORM_NO1).val(comm.I.mobilePhoneNo.substring(0,2).concat('+'));
+			$(ENV.FORM_ID).find(ENV.FORM_NO2).val(comm.I.mobilePhoneNo.substring(2,4));
+			$(ENV.FORM_ID).find(ENV.FORM_NO3).val(comm.I.mobilePhoneNo.substring(4,8));
+			$(ENV.FORM_ID).find(ENV.FORM_NO4).val(comm.I.mobilePhoneNo.substring(8));
 			
 			$(ENV.BTN_GROUP_BOTTOM).hide();
 			$("[data-mode]").attr("data-mode", "view");
@@ -154,13 +153,18 @@ page.MyPage = (function(){
 		},
 		
 		doModify: function(){
-			
+
+			var mobilePhoneNo = $(ENV.FORM_ID).find(ENV.FORM_NO1).val().replace('+','')
+				.concat($(ENV.FORM_ID).find(ENV.FORM_NO2).val()
+					, $(ENV.FORM_ID).find(ENV.FORM_NO3).val()
+					, $(ENV.FORM_ID).find(ENV.FORM_NO4).val());
 			var formdata = {
+				loginName: $(ENV.FORM_ID).find(ENV.FORM_UNAME).val(),
 				emailAddress: $(ENV.FORM_ID).find(ENV.FORM_EMAIL).val(),
 				firstName: $(ENV.FORM_ID).find(ENV.FORM_F_NAME).val(),
-				lastName: $(ENV.FORM_ID).find(ENV.FORM_L_NAME).val()
-			}
-			
+				lastName: $(ENV.FORM_ID).find(ENV.FORM_L_NAME).val(),
+				mobilePhoneNo: mobilePhoneNo
+			};
 			comm.callApi({
 				url: comm.server.url+"/user/users",
 				method: "PUT",
@@ -212,7 +216,7 @@ page.MyPage = (function(){
 				var formdata = {
 					emailAddress: $(ENV.FORM_ID).find(ENV.FORM_EMAIL).val(),
 					password: $(ENV.FORM_ID).find(ENV.FORM_PWD).val()
-				}
+				};
 				
 				formdata.password = sha256_digest(formdata.password);
 				

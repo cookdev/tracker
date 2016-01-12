@@ -66,7 +66,7 @@ databaseChangeLog:
                   value: ssc
               - column:
                   name: mobile_phone_no
-                  value: 010-1234-5678
+                  value: +821012345678
               - column:
                   name: created_by
                   value: anyframe
@@ -90,7 +90,7 @@ databaseChangeLog:
                   value: ssc
               - column:
                   name: mobile_phone_no
-                  value: 010-8765-4321
+                  value: +821087654321
               - column:
                   name: created_by
                   value: anyframe
